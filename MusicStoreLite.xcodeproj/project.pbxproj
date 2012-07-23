@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		63CD67B715BD58410050836F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67B615BD58410050836F /* UIKit.framework */; };
+		63CD67B915BD58410050836F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67B815BD58410050836F /* Foundation.framework */; };
+		63CD67BB15BD58410050836F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67BA15BD58410050836F /* CoreGraphics.framework */; };
+		63CD67C115BD58410050836F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63CD67BF15BD58410050836F /* InfoPlist.strings */; };
+		63CD67C315BD58410050836F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD67C215BD58410050836F /* main.m */; };
+		63CD67C715BD58410050836F /* FNMusicStoreAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD67C615BD58410050836F /* FNMusicStoreAppDelegate.m */; };
+		63CD67CA15BD58410050836F /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63CD67C815BD58410050836F /* MainStoryboard.storyboard */; };
+		63CD67CD15BD58410050836F /* FNMusicStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD67CC15BD58410050836F /* FNMusicStoreViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		63CD67B215BD58410050836F /* MusicStoreLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicStoreLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63CD67B615BD58410050836F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		63CD67B815BD58410050836F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		63CD67BA15BD58410050836F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		63CD67BE15BD58410050836F /* MusicStoreLite-Info.plist */ = {isa = PBXFileReference; path = "MusicStoreLite-Info.plist"; sourceTree = "<group>"; };
+		63CD67C015BD58410050836F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		63CD67C215BD58410050836F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		63CD67C415BD58410050836F /* MusicStoreLite-Prefix.pch */ = {isa = PBXFileReference; path = "MusicStoreLite-Prefix.pch"; sourceTree = "<group>"; };
+		63CD67C515BD58410050836F /* FNMusicStoreAppDelegate.h */ = {isa = PBXFileReference; path = FNMusicStoreAppDelegate.h; sourceTree = "<group>"; };
+		63CD67C615BD58410050836F /* FNMusicStoreAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FNMusicStoreAppDelegate.m; sourceTree = "<group>"; };
+		63CD67C915BD58410050836F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		63CD67CB15BD58410050836F /* FNMusicStoreViewController.h */ = {isa = PBXFileReference; path = FNMusicStoreViewController.h; sourceTree = "<group>"; };
+		63CD67CC15BD58410050836F /* FNMusicStoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FNMusicStoreViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		63CD67AF15BD58410050836F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63CD67B715BD58410050836F /* UIKit.framework in Frameworks */,
+				63CD67B915BD58410050836F /* Foundation.framework in Frameworks */,
+				63CD67BB15BD58410050836F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63CD67A715BD58400050836F = {
+			isa = PBXGroup;
+			children = (
+				63CD67BC15BD58410050836F /* MusicStoreLite */,
+				63CD67B515BD58410050836F /* Frameworks */,
+				63CD67B315BD58410050836F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		63CD67B315BD58410050836F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63CD67B215BD58410050836F /* MusicStoreLite.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		63CD67B515BD58410050836F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63CD67B615BD58410050836F /* UIKit.framework */,
+				63CD67B815BD58410050836F /* Foundation.framework */,
+				63CD67BA15BD58410050836F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63CD67BC15BD58410050836F /* MusicStoreLite */ = {
+			isa = PBXGroup;
+			children = (
+				63CD67C515BD58410050836F /* FNMusicStoreAppDelegate.h */,
+				63CD67C615BD58410050836F /* FNMusicStoreAppDelegate.m */,
+				63CD67C815BD58410050836F /* MainStoryboard.storyboard */,
+				63CD67CB15BD58410050836F /* FNMusicStoreViewController.h */,
+				63CD67CC15BD58410050836F /* FNMusicStoreViewController.m */,
+				63CD67BD15BD58410050836F /* Supporting Files */,
+			);
+			path = MusicStoreLite;
+			sourceTree = "<group>";
+		};
+		63CD67BD15BD58410050836F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				63CD67BE15BD58410050836F /* MusicStoreLite-Info.plist */,
+				63CD67BF15BD58410050836F /* InfoPlist.strings */,
+				63CD67C215BD58410050836F /* main.m */,
+				63CD67C415BD58410050836F /* MusicStoreLite-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63CD67B115BD58410050836F /* MusicStoreLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63CD67D015BD58410050836F /* Build configuration list for PBXNativeTarget "MusicStoreLite" */;
+			buildPhases = (
+				63CD67AE15BD58410050836F /* Sources */,
+				63CD67AF15BD58410050836F /* Frameworks */,
+				63CD67B015BD58410050836F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MusicStoreLite;
+			productName = MusicStoreLite;
+			productReference = 63CD67B215BD58410050836F /* MusicStoreLite.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		63CD67A915BD58400050836F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FNMusicStore;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Recruit;
+			};
+			buildConfigurationList = 63CD67AC15BD58400050836F /* Build configuration list for PBXProject "MusicStoreLite" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 63CD67A715BD58400050836F;
+			productRefGroup = 63CD67B315BD58410050836F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63CD67B115BD58410050836F /* MusicStoreLite */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		63CD67B015BD58410050836F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63CD67C115BD58410050836F /* InfoPlist.strings in Resources */,
+				63CD67CA15BD58410050836F /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63CD67AE15BD58410050836F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63CD67C315BD58410050836F /* main.m in Sources */,
+				63CD67C715BD58410050836F /* FNMusicStoreAppDelegate.m in Sources */,
+				63CD67CD15BD58410050836F /* FNMusicStoreViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		63CD67BF15BD58410050836F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63CD67C015BD58410050836F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		63CD67C815BD58410050836F /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				63CD67C915BD58410050836F /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		63CD67CE15BD58410050836F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		63CD67CF15BD58410050836F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		63CD67D115BD58410050836F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MusicStoreLite/MusicStoreLite-Prefix.pch";
+				INFOPLIST_FILE = "MusicStoreLite/MusicStoreLite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		63CD67D215BD58410050836F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MusicStoreLite/MusicStoreLite-Prefix.pch";
+				INFOPLIST_FILE = "MusicStoreLite/MusicStoreLite-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63CD67AC15BD58400050836F /* Build configuration list for PBXProject "MusicStoreLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63CD67CE15BD58410050836F /* Debug */,
+				63CD67CF15BD58410050836F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63CD67D015BD58410050836F /* Build configuration list for PBXNativeTarget "MusicStoreLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63CD67D115BD58410050836F /* Debug */,
+				63CD67D215BD58410050836F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 63CD67A915BD58400050836F /* Project object */;
+}
