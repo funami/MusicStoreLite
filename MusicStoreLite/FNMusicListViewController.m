@@ -9,6 +9,8 @@
 #import "FNMusicListViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
+#import "FNMusicPlayManeger.h"
+#import "FNMusicListCell.h"
 
 
 @interface FNMusicListViewController ()
@@ -24,23 +26,30 @@
 - (void)loadRSS
 {
     NSString *countryCode = [self.detailItem objectForKey:@"code"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=100/json",countryCode]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.objects = [[JSON objectForKey:@"feed"] objectForKey:@"entry"]; 
-        [self.tableView reloadData];
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-        //ネットワーク不調のときは失敗
-        [self.navigationItem setPrompt:[error localizedDescription]];
-        NSLog(@"Error:%@",error);
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
-    }];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [operation start];    
     
+    if ([[FNMusicPlayManeger sharedManager].playListId isEqualToString:countryCode]){
+        self.objects = [[FNMusicPlayManeger sharedManager] playList];
+    }else{
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=100/json",countryCode]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            self.objects = [[JSON objectForKey:@"feed"] objectForKey:@"entry"]; 
+            
+            [[FNMusicPlayManeger sharedManager] setPlayList:self.objects playListId:countryCode];
+            
+            [self.tableView reloadData];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+            //ネットワーク不調のときは失敗
+            [self.navigationItem setPrompt:[error localizedDescription]];
+            NSLog(@"Error:%@",error);
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+        }];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [operation start];    
+    }
     self.title = [self.detailItem objectForKey:@"display"];
 }
 
@@ -99,16 +108,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"MusicCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    FNMusicListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     NSDictionary *item = [self.objects objectAtIndex:indexPath.row];
     NSString *labelText = [NSString stringWithFormat:@"%d.%@",indexPath.row+1,[[item objectForKey:@"im:name"] objectForKey:@"label"]];
-    cell.textLabel.text = labelText;
+    cell.myTextLabel.text = labelText;
     
     NSString *detailText = [NSString stringWithFormat:@"%@",[[item objectForKey:@"im:artist"] objectForKey:@"label" ]];
-    cell.detailTextLabel.text = detailText;;
+    cell.myDetailTextLabel.text = detailText;;
 
+    cell.myPriceTextLabel.text = [[item objectForKey:@"im:price"] objectForKey:@"label" ];
     NSURL *imageURL = nil;
     NSArray *imgs = [item objectForKey:@"im:image"];
     for (NSDictionary *img in imgs){
@@ -120,7 +130,7 @@
             }
         }
     }
-    [cell.imageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"noImage.png"]];
+    [cell.myImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"noImage.png"]];
     
     return cell;
 }

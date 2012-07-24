@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FNMusicStoreViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface FNMusicStoreViewController : UITableViewController
 
 @end
