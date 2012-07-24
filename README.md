@@ -17,7 +17,7 @@ iTunes Music Store Sample Music Player
 
 音楽を連続再生を行うための、Tipsが含まれます。
 
-世界各国のITMSのランキングを表示し、再生できます。情報は「[iTUnes RSS Generator](http://itunes.apple.com/jp/rss/generator/)」より取得しています
+世界各国のITMSのランキングを表示し、再生できます。情報は「[iTunes RSS Generator](http://itunes.apple.com/jp/rss/generator/)」より取得しています
 
 MTLよりリリースされている、音楽連続再生アプリ、Attacca開発のノウハウからエッセンスを取り出して、サンプルコードにしました。
 

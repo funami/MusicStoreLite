@@ -61,8 +61,11 @@ static const NSString *PlayerRateContext;
     if (_currentIndex != currentIndex){
         _currentIndex = currentIndex;
     }
+    [self updatePlayingInfo];
     if (self.delegate)
         [self.delegate musicManeger:self MusicDidChanged:_currentIndex past:pasetIndex];
+    
+    
 }
 -(void)setPlayingMusic:(BOOL)playingMusic
 {
@@ -311,6 +314,34 @@ static const NSString *PlayerRateContext;
             [self play];
         }
     }    
+}
+
+#pragma mark - MPNowPlayingInfoCenter
+// ロック画面に曲名を表示する
+- (void)updatePlayingInfo{
+    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+    
+    if (playingInfoCenter) {
+        NSDictionary *item = [self.playList objectAtIndex:self.currentIndex];
+        
+        NSMutableDictionary *songInfo = [[NSMutableDictionary alloc] init];
+        [songInfo setObject:[[item objectForKey:@"im:name"] objectForKey:@"label"] forKey:MPMediaItemPropertyTitle];
+        [songInfo setObject:[[item objectForKey:@"im:artist"] objectForKey:@"label"] forKey:MPMediaItemPropertyArtist];
+        [songInfo setObject:[[[item objectForKey:@"im:collection"] objectForKey:@"im:name"] objectForKey:@"label"] forKey:MPMediaItemPropertyAlbumTitle];
+        
+        MPMediaItemArtwork *artwork = nil;
+        if (artwork){
+            [songInfo setObject:artwork forKey:MPMediaItemPropertyArtwork];
+        }else{
+            [songInfo setObject:[[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:@"no_image.png"]] forKey:MPMediaItemPropertyArtwork];
+        }
+
+        
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songInfo];
+        //NSLog(@"songInfo:%@",songInfo);
+        
+    }
+    
 }
 
 
