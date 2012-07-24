@@ -9,7 +9,6 @@
 #import "FNMusicListViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
-#import "FNMusicPlayManager.h"
 #import "FNMusicListCell.h"
 
 
@@ -20,6 +19,8 @@
 
 @implementation FNMusicListViewController
 @synthesize detailItem = _detailItem;
+@synthesize playButton = _playButton;
+@synthesize pauseButton = _pauseButton;
 @synthesize objects = _objects;
 
 #pragma mark - RSS
@@ -27,16 +28,20 @@
 {
     NSString *countryCode = [self.detailItem objectForKey:@"code"];
     
-    // 既に、MusicPlay
+    // 既に、同じストアで再生中ならそのまま、引き継ぐ
     if ([[FNMusicPlayManager sharedManager].playListId isEqualToString:countryCode]){
         self.objects = [[FNMusicPlayManager sharedManager] playList];
+        [FNMusicPlayManager sharedManager].delegate = self;
+        [self updateToolBarButtons];
     }else{
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=100/json",countryCode]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=50/json",countryCode]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             self.objects = [[JSON objectForKey:@"feed"] objectForKey:@"entry"]; 
             
             [[FNMusicPlayManager sharedManager] setPlayList:self.objects playListInfo:self.detailItem];
+            [FNMusicPlayManager sharedManager].delegate = self;
+            [self updateToolBarButtons];
             
             [self.tableView reloadData];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -52,6 +57,8 @@
         [operation start];    
     }
     self.title = [self.detailItem objectForKey:@"display"];
+        
+    
 }
 
 
@@ -69,19 +76,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     
     [self loadRSS];
 }
 
 - (void)viewDidUnload
 {
+    [FNMusicPlayManager sharedManager].delegate = nil;
+    [self setPlayButton:nil];
+    [self setPauseButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -90,6 +93,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)dealloc
+{
+    [FNMusicPlayManager sharedManager].delegate = nil;
 }
 
 #pragma mark - Table view data source
@@ -106,19 +114,15 @@
     return [self.objects count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(FNMusicListCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MusicCell";
-    FNMusicListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
     NSDictionary *item = [self.objects objectAtIndex:indexPath.row];
     NSString *labelText = [NSString stringWithFormat:@"%d.%@",indexPath.row+1,[[item objectForKey:@"im:name"] objectForKey:@"label"]];
     cell.myTextLabel.text = labelText;
     
     NSString *detailText = [NSString stringWithFormat:@"%@",[[item objectForKey:@"im:artist"] objectForKey:@"label" ]];
     cell.myDetailTextLabel.text = detailText;;
-
+    
     cell.myPriceTextLabel.text = [[item objectForKey:@"im:price"] objectForKey:@"label" ];
     NSURL *imageURL = nil;
     NSArray *imgs = [item objectForKey:@"im:image"];
@@ -132,60 +136,70 @@
         }
     }
     [cell.myImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"noImage.png"]];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"MusicCell";
+    FNMusicListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // Configure the cell...
+    [self configureCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[FNMusicPlayManager sharedManager] playAtIndex:indexPath.row];
+}
+
+#pragma mark - Music play
+
+- (void)updateToolBarButtons{
+    if ([FNMusicPlayManager sharedManager].playingMusic){
+        [self.pauseButton setEnabled:YES];
+        [self.playButton setEnabled:NO];
+    }else{
+        [self.pauseButton setEnabled:NO];
+        [self.playButton setEnabled:YES];
+    }
+    int index = [FNMusicPlayManager sharedManager].currentIndex;
+    NSDictionary *item = [self.objects objectAtIndex:index];
+    [self.navigationItem setPrompt:[NSString stringWithFormat:@"%d.%@",index+1,[[item objectForKey:@"title"] objectForKey:@"label"]]];
+}
+
+- (IBAction)play:(id)sender {
+    [[FNMusicPlayManager sharedManager] play];
+}
+
+- (IBAction)pause:(id)sender {
+    [[FNMusicPlayManager sharedManager] pause];
+}
+
+- (IBAction)next:(id)sender {
+    [[FNMusicPlayManager sharedManager] next];
+}
+
+- (IBAction)prev:(id)sender {
+    [[FNMusicPlayManager sharedManager] prev];
+}
+
+#pragma mark - FNMusicPlayManagerDelegate
+- (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidChanged:(NSInteger)index past:(NSInteger)past
+{
+    [self updateToolBarButtons];
+}
+- (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidStarted:(NSInteger)index
+{
+    [self updateToolBarButtons];
+}
+- (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidStoped:(NSInteger)index
+{
+    [self updateToolBarButtons];
 }
 
 @end

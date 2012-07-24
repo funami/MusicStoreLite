@@ -47,7 +47,16 @@
                             <outlet property="delegate" destination="2" id="5Kg-sG-PGd"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rlI-eM-dRU"/>
+                        <barButtonItem title="Powered By Attaca" id="PeR-gS-uA8">
+                            <connections>
+                                <action selector="openAttaccaPage:" destination="2" id="ggL-fA-kBr"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Music Stores" id="ICS-QU-D51"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="uDM-q8-i9p" id="NEE-Mz-uaH"/>
                     </connections>
@@ -115,14 +124,34 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="JAc-ge-VmI"/>
-                        <barButtonItem systemItem="rewind" id="NfQ-Ng-NhE"/>
-                        <barButtonItem systemItem="play" id="KnE-Di-IDo"/>
-                        <barButtonItem systemItem="pause" id="XK4-HT-7br"/>
-                        <barButtonItem systemItem="fastForward" id="8qP-Gv-PtJ"/>
+                        <barButtonItem systemItem="rewind" id="NfQ-Ng-NhE">
+                            <connections>
+                                <action selector="prev:" destination="PhU-ym-yV2" id="LNo-Rf-101"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="play" id="KnE-Di-IDo">
+                            <connections>
+                                <action selector="play:" destination="PhU-ym-yV2" id="zNk-oq-OXt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="pause" id="XK4-HT-7br">
+                            <connections>
+                                <action selector="pause:" destination="PhU-ym-yV2" id="PdT-ZN-vXc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="fastForward" id="8qP-Gv-PtJ">
+                            <connections>
+                                <action selector="next:" destination="PhU-ym-yV2" id="DdJ-I6-id2"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="wgI-NT-VoB"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="VGc-Jc-lCw"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="pauseButton" destination="XK4-HT-7br" id="342-uJ-SPv"/>
+                        <outlet property="playButton" destination="KnE-Di-IDo" id="uxm-fb-N53"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWE-Jk-jb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

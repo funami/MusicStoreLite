@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FNMusicStoreViewController : UITableViewController
+- (IBAction)openAttaccaPage:(id)sender;
 
 @end

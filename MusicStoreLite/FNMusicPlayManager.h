@@ -14,7 +14,7 @@
 @class FNMusicPlayManager;
 @protocol FNMusicPlayManagerDelegate <NSObject>
 
-/* musicがなくなった場合は、indexはNSNotFoundになる */
+#pragma mark - FNMusicPlayManagerDelegate
 - (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidChanged:(NSInteger)index past:(NSInteger)past;
 - (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidStarted:(NSInteger)index;
 - (void)musicManeger:(FNMusicPlayManager *)musicManager MusicDidStoped:(NSInteger)index;
@@ -24,6 +24,7 @@
 @interface FNMusicPlayManager : NSObject<AVAudioSessionDelegate>
 {
     BOOL _shouldResume;
+    NSArray *_palyURLs;
     AVQueuePlayer *_player;
 }
 
@@ -31,6 +32,8 @@
 @property (nonatomic,readonly) NSString *playListId;
 @property (nonatomic,strong) NSDictionary *playListInfo;
 @property (nonatomic,strong) NSArray *playList;
+@property (nonatomic) NSUInteger currentIndex;
+@property (nonatomic,assign) id delegate;
 
 + (FNMusicPlayManager *)sharedManager;
 
@@ -41,6 +44,7 @@
 - (void)prev;
 - (void)playOrPause;
 - (void)playAtIndex:(NSInteger)index;
+- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent ;
 
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		634E6D4215BECB68000BFB1F /* FNMusicListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 634E6D4115BECB68000BFB1F /* FNMusicListCell.m */; };
+		634E6D4815BEFAF3000BFB1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 634E6D4715BEFAF3000BFB1F /* README.md */; };
 		63CD67B715BD58410050836F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67B615BD58410050836F /* UIKit.framework */; };
 		63CD67B915BD58410050836F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67B815BD58410050836F /* Foundation.framework */; };
 		63CD67BB15BD58410050836F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD67BA15BD58410050836F /* CoreGraphics.framework */; };
@@ -286,6 +287,7 @@
 /* Begin PBXFileReference section */
 		634E6D4015BECB68000BFB1F /* FNMusicListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNMusicListCell.h; sourceTree = "<group>"; };
 		634E6D4115BECB68000BFB1F /* FNMusicListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNMusicListCell.m; sourceTree = "<group>"; };
+		634E6D4715BEFAF3000BFB1F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		63CD67B215BD58410050836F /* MusicStoreLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicStoreLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CD67B615BD58410050836F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		63CD67B815BD58410050836F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -599,6 +601,7 @@
 		63CD67A715BD58400050836F = {
 			isa = PBXGroup;
 			children = (
+				634E6D4715BEFAF3000BFB1F /* README.md */,
 				63CD67D315BD5B4F0050836F /* external */,
 				63CD67BC15BD58410050836F /* MusicStoreLite */,
 				63CD67B515BD58410050836F /* Frameworks */,
@@ -1273,6 +1276,7 @@
 				63CD6BE115BE8A980050836F /* ZW.png in Resources */,
 				63CD6BE715BE8D3E0050836F /* music_store.json in Resources */,
 				63CD6BF215BE9F380050836F /* noImage.png in Resources */,
+				634E6D4815BEFAF3000BFB1F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

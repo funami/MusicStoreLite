@@ -104,4 +104,8 @@
 }
 
 
+- (IBAction)openAttaccaPage:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/jp/app/attacca-wu-liaode-lian-xu/id534897173?mt=8"];
+    [[UIApplication sharedApplication] openURL:url];
+}
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "FNMusicStoreAppDelegate.h"
+#import "FNMusicPlayManager.h"
 
 @implementation FNMusicStoreAppDelegate
 
@@ -43,6 +44,19 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark -
+#pragma mark Remote-control event handling
+// Respond to remote control events
+// リモコンからのイベントをここで、キャッチして、FNMusicPlayManagerにおくります。
+// シミュレーターでは効果が出ない？
+// http://stackoverflow.com/questions/3203928/ios4-background-audio-with-iphone-simulator?rq=1
+// iOS4 - Background audio with iPhone Simulatorとか参考にしたら、でるかも知れないが、試してないです。実機ではうごきました。
+
+- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
+    
+    [[FNMusicPlayManager sharedManager] remoteControlReceivedWithEvent:receivedEvent];
 }
 
 @end

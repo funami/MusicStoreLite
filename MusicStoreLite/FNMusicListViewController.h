@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FNMusicPlayManager.h"
 
-@interface FNMusicListViewController : UITableViewController
+@interface FNMusicListViewController : UITableViewController<FNMusicPlayManagerDelegate>
 
 @property (nonatomic,retain) id detailItem;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *pauseButton;
 
+- (void)updateToolBarButtons;
+
+- (IBAction)play:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)next:(id)sender;
+- (IBAction)prev:(id)sender;
 @end
