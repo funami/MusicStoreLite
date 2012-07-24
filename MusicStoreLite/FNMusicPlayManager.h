@@ -25,6 +25,7 @@
 {
     BOOL _shouldResume;
     NSArray *_palyURLs;
+    NSMutableDictionary *_artworks;
     AVQueuePlayer *_player;
 }
 

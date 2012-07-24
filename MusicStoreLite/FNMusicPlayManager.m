@@ -27,6 +27,10 @@ static const NSString *PlayerRateContext;
     dispatch_once(&doneSharedMusicManager, ^{ 
         sharedMusicManager = [FNMusicPlayManager new];
         
+        //アートワークの読み込みを非同期で行うため
+        [[NSNotificationCenter defaultCenter] addObserver:sharedMusicManager selector:@selector(artworkLoaded:) name:@"FNAMusicArtWorkLoaded" object:nil];
+
+        
         // バックグラウンドでも、再生を続けるために、AVAudioSessionをAVAudioSessionCategoryPlaybackに
         AVAudioSession *session = [AVAudioSession sharedInstance];
         session.delegate = sharedMusicManager; // 電話等から、復帰時に、再生を再開できるように、delegate接続
@@ -194,6 +198,7 @@ static const NSString *PlayerRateContext;
     if (_playList != playList){
         _playList = playList;
         _playListInfo = playListInfo;
+        _artworks = [NSMutableDictionary dictionary];
         self.currentIndex = 0;
         
         [self stop];
@@ -318,6 +323,37 @@ static const NSString *PlayerRateContext;
 
 #pragma mark - MPNowPlayingInfoCenter
 // ロック画面に曲名を表示する
+- (MPMediaItemArtwork *)artwork:(NSString *)urlString
+{
+    
+    MPMediaItemArtwork *artwork = [_artworks objectForKey:urlString];
+    
+    if (artwork != nil){
+        return artwork;
+    }else{
+        NSURL *imageURL = nil;
+        imageURL = [NSURL URLWithString:urlString];
+        if (imageURL != nil){
+            NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+            [NSURLConnection sendAsynchronousRequest:request
+                                               queue:[NSOperationQueue mainQueue]
+                                   completionHandler:^(NSURLResponse *res, NSData *data, NSError *error){
+                                       if (!error){
+                                           MPMediaItemArtwork *art = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithData:data]];
+                                           [_artworks setObject:art forKey:urlString];
+                                           [[NSNotificationCenter defaultCenter] postNotificationName:@"FNAMusicArtWorkLoaded" object:self];
+                                       }else{
+    #ifdef DEBUG
+                                           NSLog(@"error cant retrieve artwork");
+    #endif
+                                       }
+                                   }];
+        }
+    }
+    return nil;
+}
+
+
 - (void)updatePlayingInfo{
     Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
     
@@ -329,7 +365,19 @@ static const NSString *PlayerRateContext;
         [songInfo setObject:[[item objectForKey:@"im:artist"] objectForKey:@"label"] forKey:MPMediaItemPropertyArtist];
         [songInfo setObject:[[[item objectForKey:@"im:collection"] objectForKey:@"im:name"] objectForKey:@"label"] forKey:MPMediaItemPropertyAlbumTitle];
         
-        MPMediaItemArtwork *artwork = nil;
+        NSURL *imageURL = nil;
+        NSArray *imgs = [item objectForKey:@"im:image"];
+        for (NSDictionary *img in imgs){
+            NSDictionary *attributes = [img objectForKey:@"attributes"];
+            if (attributes != nil){
+                if ([[attributes objectForKey:@"height"] isEqualToString:@"170"]){
+                    NSString *urlString = [img objectForKey:@"label"];
+                    imageURL = [NSURL URLWithString:urlString];
+                }
+            }
+        }
+        
+        MPMediaItemArtwork *artwork = [self artwork:imageURL.absoluteString];
         if (artwork){
             [songInfo setObject:artwork forKey:MPMediaItemPropertyArtwork];
         }else{
@@ -344,5 +392,10 @@ static const NSString *PlayerRateContext;
     
 }
 
+
+- (void)artworkLoaded:(NSNotification *)notification
+{
+    [self updatePlayingInfo];
+}
 
 @end
