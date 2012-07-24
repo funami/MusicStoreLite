@@ -30,13 +30,15 @@
         self.objects = JSON;
         
         [self.tableView reloadData];
-
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
         //オフラインの時は、デフォルトデータを表示する
         NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"music_store" ofType:@"json"]];
         
         self.objects = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [operation start];
 }
 

@@ -7,13 +7,45 @@
 //
 
 #import "FNMusicListViewController.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+
 
 @interface FNMusicListViewController ()
+@property (nonatomic,retain) NSArray *objects;
 
 @end
 
 @implementation FNMusicListViewController
 @synthesize detailItem = _detailItem;
+@synthesize objects = _objects;
+
+#pragma mark - RSS
+- (void)loadRSS
+{
+    NSString *countryCode = [self.detailItem objectForKey:@"code"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=100/json",countryCode]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.objects = [[JSON objectForKey:@"feed"] objectForKey:@"entry"]; 
+        [self.tableView reloadData];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+        //ネットワーク不調のときは失敗
+        [self.navigationItem setPrompt:[error localizedDescription]];
+        NSLog(@"Error:%@",error);
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+    }];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [operation start];    
+    
+    self.title = [self.detailItem objectForKey:@"display"];
+}
+
+
+#pragma mark - TableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,6 +65,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+    [self loadRSS];
 }
 
 - (void)viewDidUnload
@@ -51,24 +86,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.objects count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"MusicCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    NSDictionary *item = [self.objects objectAtIndex:indexPath.row];
+    NSString *labelText = [NSString stringWithFormat:@"%d.%@",indexPath.row+1,[[item objectForKey:@"im:name"] objectForKey:@"label"]];
+    cell.textLabel.text = labelText;
+    
+    NSString *detailText = [NSString stringWithFormat:@"%@",[[item objectForKey:@"im:artist"] objectForKey:@"label" ]];
+    cell.detailTextLabel.text = detailText;;
+
+    NSURL *imageURL = nil;
+    NSArray *imgs = [item objectForKey:@"im:image"];
+    for (NSDictionary *img in imgs){
+        NSDictionary *attributes = [img objectForKey:@"attributes"];
+        if (attributes != nil){
+            if ([[attributes objectForKey:@"height"] isEqualToString:@"55"]){
+                NSString *urlString = [img objectForKey:@"label"];
+                imageURL = [NSURL URLWithString:urlString];
+            }
+        }
+    }
+    [cell.imageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"noImage.png"]];
     
     return cell;
 }

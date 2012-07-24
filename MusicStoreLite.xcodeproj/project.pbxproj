@@ -276,6 +276,7 @@
 		63CD6BE115BE8A980050836F /* ZW.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD6AE815BE8A970050836F /* ZW.png */; };
 		63CD6BE415BE8BF60050836F /* FNMusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD6BE315BE8BF60050836F /* FNMusicListViewController.m */; };
 		63CD6BE715BE8D3E0050836F /* music_store.json in Resources */ = {isa = PBXBuildFile; fileRef = 63CD6BE615BE8D3E0050836F /* music_store.json */; };
+		63CD6BF215BE9F380050836F /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD6BF115BE9F380050836F /* noImage.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -566,6 +567,7 @@
 		63CD6BE215BE8BF60050836F /* FNMusicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNMusicListViewController.h; sourceTree = "<group>"; };
 		63CD6BE315BE8BF60050836F /* FNMusicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNMusicListViewController.m; sourceTree = "<group>"; };
 		63CD6BE615BE8D3E0050836F /* music_store.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = music_store.json; sourceTree = "<group>"; };
+		63CD6BF115BE9F380050836F /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -614,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				63CD6BE515BE8D3E0050836F /* data */,
+				63CD6BF015BE9F380050836F /* image */,
 				63CD67F815BD63F40050836F /* MusicStoreLite-Prefix.pch */,
 				63CD67C515BD58410050836F /* FNMusicStoreAppDelegate.h */,
 				63CD67C615BD58410050836F /* FNMusicStoreAppDelegate.m */,
@@ -939,6 +942,14 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		63CD6BF015BE9F380050836F /* image */ = {
+			isa = PBXGroup;
+			children = (
+				63CD6BF115BE9F380050836F /* noImage.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1243,6 +1254,7 @@
 				63CD6BE015BE8A980050836F /* ZM.png in Resources */,
 				63CD6BE115BE8A980050836F /* ZW.png in Resources */,
 				63CD6BE715BE8D3E0050836F /* music_store.json in Resources */,
+				63CD6BF215BE9F380050836F /* noImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
