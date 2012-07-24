@@ -278,7 +278,7 @@
 		63CD6BE415BE8BF60050836F /* FNMusicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD6BE315BE8BF60050836F /* FNMusicListViewController.m */; };
 		63CD6BE715BE8D3E0050836F /* music_store.json in Resources */ = {isa = PBXBuildFile; fileRef = 63CD6BE615BE8D3E0050836F /* music_store.json */; };
 		63CD6BF215BE9F380050836F /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CD6BF115BE9F380050836F /* noImage.png */; };
-		63CD6BF815BEA7050050836F /* FNMusicPlayManeger.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD6BF715BEA7050050836F /* FNMusicPlayManeger.m */; };
+		63CD6BF815BEA7050050836F /* FNMusicPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CD6BF715BEA7050050836F /* FNMusicPlayManager.m */; };
 		63CD6BFA15BEA76D0050836F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD6BF915BEA76D0050836F /* AVFoundation.framework */; };
 		63CD6BFC15BEA7900050836F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CD6BFB15BEA7900050836F /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -574,8 +574,8 @@
 		63CD6BE315BE8BF60050836F /* FNMusicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNMusicListViewController.m; sourceTree = "<group>"; };
 		63CD6BE615BE8D3E0050836F /* music_store.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = music_store.json; sourceTree = "<group>"; };
 		63CD6BF115BE9F380050836F /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
-		63CD6BF615BEA7050050836F /* FNMusicPlayManeger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNMusicPlayManeger.h; sourceTree = "<group>"; };
-		63CD6BF715BEA7050050836F /* FNMusicPlayManeger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNMusicPlayManeger.m; sourceTree = "<group>"; };
+		63CD6BF615BEA7050050836F /* FNMusicPlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNMusicPlayManager.h; sourceTree = "<group>"; };
+		63CD6BF715BEA7050050836F /* FNMusicPlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNMusicPlayManager.m; sourceTree = "<group>"; };
 		63CD6BF915BEA76D0050836F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		63CD6BFB15BEA7900050836F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -641,8 +641,8 @@
 				63CD6BE315BE8BF60050836F /* FNMusicListViewController.m */,
 				634E6D4015BECB68000BFB1F /* FNMusicListCell.h */,
 				634E6D4115BECB68000BFB1F /* FNMusicListCell.m */,
-				63CD6BF615BEA7050050836F /* FNMusicPlayManeger.h */,
-				63CD6BF715BEA7050050836F /* FNMusicPlayManeger.m */,
+				63CD6BF615BEA7050050836F /* FNMusicPlayManager.h */,
+				63CD6BF715BEA7050050836F /* FNMusicPlayManager.m */,
 				63CD67BD15BD58410050836F /* Supporting Files */,
 			);
 			path = MusicStoreLite;
@@ -1297,7 +1297,7 @@
 				63CD67F215BD5B4F0050836F /* AFXMLRequestOperation.m in Sources */,
 				63CD67F315BD5B4F0050836F /* UIImageView+AFNetworking.m in Sources */,
 				63CD6BE415BE8BF60050836F /* FNMusicListViewController.m in Sources */,
-				63CD6BF815BEA7050050836F /* FNMusicPlayManeger.m in Sources */,
+				63CD6BF815BEA7050050836F /* FNMusicPlayManager.m in Sources */,
 				634E6D4215BECB68000BFB1F /* FNMusicListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

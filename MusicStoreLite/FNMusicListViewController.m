@@ -9,7 +9,7 @@
 #import "FNMusicListViewController.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
-#import "FNMusicPlayManeger.h"
+#import "FNMusicPlayManager.h"
 #import "FNMusicListCell.h"
 
 
@@ -27,15 +27,16 @@
 {
     NSString *countryCode = [self.detailItem objectForKey:@"code"];
     
-    if ([[FNMusicPlayManeger sharedManager].playListId isEqualToString:countryCode]){
-        self.objects = [[FNMusicPlayManeger sharedManager] playList];
+    // 既に、MusicPlay
+    if ([[FNMusicPlayManager sharedManager].playListId isEqualToString:countryCode]){
+        self.objects = [[FNMusicPlayManager sharedManager] playList];
     }else{
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/%@/rss/topsongs/limit=100/json",countryCode]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             self.objects = [[JSON objectForKey:@"feed"] objectForKey:@"entry"]; 
             
-            [[FNMusicPlayManeger sharedManager] setPlayList:self.objects playListId:countryCode];
+            [[FNMusicPlayManager sharedManager] setPlayList:self.objects playListInfo:self.detailItem];
             
             [self.tableView reloadData];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

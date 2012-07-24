@@ -1,45 +1,54 @@
 //
-//  FNMusicPlayManeger.m
+//  FNMusicPlayManager.m
 //  MusicStoreLite
 //
 //  Created by Takao Funami on 12/07/24.
 //  Copyright (c) 2012年 Recruit. All rights reserved.
 //
 
-#import "FNMusicPlayManeger.h"
+#import "FNMusicPlayManager.h"
 
-@implementation FNMusicPlayManeger
+@implementation FNMusicPlayManager
 @synthesize playingMusic = _playingMusic;
 @synthesize playListId = _playListId;
 @synthesize playList = _playList;
+@synthesize playListInfo = _playListInfo;
 
-+ (FNMusicPlayManeger *)sharedManager
++ (FNMusicPlayManager *)sharedManager
 {
-    static FNMusicPlayManeger *sharedMusicManeger;
-    static dispatch_once_t doneSharedMusicManeger;
-    dispatch_once(&doneSharedMusicManeger, ^{ 
-        sharedMusicManeger = [FNMusicPlayManeger new]; 
-        [[NSNotificationCenter defaultCenter] addObserver:sharedMusicManeger selector:@selector(artworkLoaded:) name:@"FNAMusicArtWorkLoaded" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:sharedMusicManeger selector:@selector(playerItemStatusChanged:) name:@"PlayItemStatusChanged" object:nil];
+    static FNMusicPlayManager *sharedMusicManager;
+    static dispatch_once_t doneSharedMusicManager;
+    dispatch_once(&doneSharedMusicManager, ^{ 
+        sharedMusicManager = [FNMusicPlayManager new];
+        [[NSNotificationCenter defaultCenter] addObserver:sharedMusicManager selector:@selector(artworkLoaded:) name:@"FNAMusicArtWorkLoaded" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:sharedMusicManager selector:@selector(playerItemStatusChanged:) name:@"PlayItemStatusChanged" object:nil];
         
         // バックグラウンドでも、再生を続けるために、AVAudioSessionをAVAudioSessionCategoryPlaybackに
         AVAudioSession *session = [AVAudioSession sharedInstance];
-        session.delegate = sharedMusicManeger; // 電話等から、復帰時に、再生を再開できるように、delegate接続
+        session.delegate = sharedMusicManager; // 電話等から、復帰時に、再生を再開できるように、delegate接続
         NSError *error;
         [session setCategory:AVAudioSessionCategoryPlayback error:&error];
         [session setActive:YES error:&error];
         
         [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     });
-    return sharedMusicManeger;       
+    return sharedMusicManager;
+}
+
+- (NSString *) playListId
+{
+    if (self.playListInfo != nil){
+        return [self.playListInfo objectForKey:@"code"];
+    }
+    return nil;
 }
 
 // play listをセットする
-- (void)setPlayList:(NSArray *)playList playListId:(NSString *)playListId
+- (void)setPlayList:(NSArray *)playList playListInfo:(NSDictionary *)playListInfo;
 {
     if (_playList != playList){
         _playList = playList;
-        _playListId = playListId;
+        _playListInfo = playListInfo;
         
     }
 }

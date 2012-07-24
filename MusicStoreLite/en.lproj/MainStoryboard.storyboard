@@ -90,12 +90,12 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" text="Label" textAlignment="right" adjustsFontSizeToFit="NO" autoshrinkMode="none" id="9T2-pr-f24">
-                                            <rect key="frame" x="269" y="17" width="39" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" text="Label" textAlignment="right" autoshrinkMode="minimumFontSize" id="9T2-pr-f24">
+                                            <rect key="frame" x="269" y="17" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -151,23 +151,6 @@
             <point key="canvasLocation" x="111" y="68"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="FNMusicListCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FNMusicListCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="myDetailTextLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="myPriceTextLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="myTextLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="FNMusicListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FNMusicListViewController.h"/>
-        </class>
-        <class className="FNMusicStoreViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FNMusicStoreViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
