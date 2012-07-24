@@ -7,21 +7,50 @@
 //
 
 #import "FNMusicStoreViewController.h"
+#import "AFNetworking.h"
+#import "FNMusicListViewController.h"
 
 @interface FNMusicStoreViewController ()
+
+@property (nonatomic,retain) NSArray *objects;
+- (void)prepareStoreListData;
 
 @end
 
 @implementation FNMusicStoreViewController
+@synthesize tableView = _tableView;
+@synthesize objects = _objects;
 
+#pragma mark - StoreInfo
+- (void)prepareStoreListData
+{
+    NSURL *url = [NSURL URLWithString:@"http://rss.rdy.jp/itm/music_store.json"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.objects = JSON;
+        
+        [self.tableView reloadData];
+
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+        //オフラインの時は、デフォルトデータを表示する
+        NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"music_store" ofType:@"json"]];
+        
+        self.objects = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    }];
+    [operation start];
+}
+
+#pragma mark - ViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self prepareStoreListData];
 }
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -30,5 +59,39 @@
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
+
+#pragma mark - TableView 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CountrryCell"];
+    
+    NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+    NSString *labelText = [NSString stringWithFormat:@"%@",[object objectForKey:@"display"]];
+    NSString *detailText = [NSString stringWithFormat:@"%@",[object objectForKey:@"code"]];
+    cell.textLabel.text = labelText;
+    cell.detailTextLabel.text = detailText;
+    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",[object objectForKey:@"code"]]];
+    return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *object = [_objects objectAtIndex:indexPath.row];
+        [[segue destinationViewController] setDetailItem:object];
+    }
+}
+
 
 @end
