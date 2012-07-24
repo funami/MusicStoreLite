@@ -98,6 +98,7 @@ static const NSString *PlayerRateContext;
         if (_player != nil){
             [_player play];            
             self.playingMusic = YES;
+            _shouldResume = YES;
         }else{
             [self playAtIndex:self.currentIndex];
         }
@@ -109,6 +110,7 @@ static const NSString *PlayerRateContext;
     if (self.playingMusic){
         [_player pause];
         self.playingMusic = NO;
+        _shouldResume = NO;
     }
 }
 
@@ -303,11 +305,6 @@ static const NSString *PlayerRateContext;
 #pragma mark Interruption event handling
 - (void)beginInterruption
 {
-    if (self.playingMusic){
-        _shouldResume = YES;
-    }else{
-        _shouldResume = NO;
-    }
     self.playingMusic = NO;
 }
 
