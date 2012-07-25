@@ -305,17 +305,24 @@ static const NSString *PlayerRateContext;
 #pragma mark Interruption event handling
 - (void)beginInterruption
 {
+    //NSLog(@"beginInterruption:%d %d",self.playingMusic,_shouldResume);
     self.playingMusic = NO;
 }
 
 - (void)endInterruptionWithFlags:(NSUInteger)flags
 {
+    //NSLog(@"endInterruptionWithFlags:%d %d %d",self.playingMusic,_shouldResume,flags);
     if (flags == AVAudioSessionInterruptionFlags_ShouldResume){
         [[AVAudioSession sharedInstance] setActive: YES error: nil];
         if (_shouldResume){
             [self play];
         }
     }    
+}
+
+- (void)inputIsAvailableChanged
+{
+    // TODO:イヤホンから、スピーカにかわったとき or その逆の挙動をここで実装する
 }
 
 #pragma mark - MPNowPlayingInfoCenter
