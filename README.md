@@ -17,6 +17,10 @@ iTunes Music Store Sample Music Player
 
 音楽を連続再生を行うための、Tipsが含まれます。
 
+![a](http://cdn-ak.f.st-hatena.com/images/fotolife/i/iRSS/20120725/20120725144726.png?1343195426)
+
+![a](http://cdn-ak.f.st-hatena.com/images/fotolife/i/iRSS/20120725/20120725144725.png?1343195507)
+
 世界各国のITMSのランキングを表示し、再生できます。情報は「[iTunes RSS Generator](http://itunes.apple.com/jp/rss/generator/)」より取得しています
 
 MTLよりリリースされている、音楽連続再生アプリ、Attacca開発のノウハウからエッセンスを取り出して、サンプルコードにしました。
