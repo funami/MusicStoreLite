@@ -30,6 +30,9 @@ MTLよりリリースされている、音楽連続再生アプリ、Attacca開�
 
 
 ####関連資料
+* 解説ブログ「iphone_dev_jp勉強会で発表した「連続再生アプリをつくろう」のサンプルソースupしました」
+<http://mtl.recruit.co.jp/blog/2012/07/iphone_dev_jpup.html>
+
 * プレゼンYouYube:
 <http://youtu.be/GhjXsAX27u8>
 
