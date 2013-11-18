@@ -283,6 +283,8 @@ static const NSString *PlayerRateContext;
         
         switch (receivedEvent.subtype) {
                 
+            case UIEventSubtypeRemoteControlPlay:
+            case UIEventSubtypeRemoteControlPause:
             case UIEventSubtypeRemoteControlTogglePlayPause:
                 [self playOrPause];
                 break;
